@@ -1,0 +1,128 @@
+ 
+{% extends './base.html' %}
+{%block title%}Courses{%endblock%}
+{%load course_custom_tags %}
+
+{%load static%}
+
+<link rel="stylesheet" href="{%  static 'courses/css/common.css' %}">
+<!-- <link rel="stylesheet" href="{%  static 'courses/css/checkout.css' %}"> -->
+
+{%block content%}
+
+<div class="container-fluid">
+<!-- <h1 class="display-4 alert border text-center" style="padding-bottom: 2vh;">Checkout page</h1> -->
+<h1 class="display-4 alert border text-center" style=" 
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    background-color: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+">Checkout page</h1>
+<hr>
+
+
+<div class="row">
+
+<div class="col ml-auto ">
+    <div class="card mx-auto" style="width: 18rem;">
+        <img src="{{course.thumblain.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{course.name}}</h5>
+          <p class="card-text">
+            Save : {{course.discount}} %
+            <br>
+            <del class="price"> {{course.price|rupee}}</del>
+                &nbsp;&nbsp;
+            <span class="price">{% call_sellprice course.price course.discount as value %}{{value|rupee}}</span>
+            </p>
+    </div>       
+</div>
+</div>
+
+<!-- <div class="col-md-6 mx-auto">
+    <div class="course-card card mx-auto shadow-sm">
+        <img src="{{course.thumblain.url}}" class="card-img-top" alt="{{course.name}} Image">
+        <div class="card-body">
+            <h5 class="card-title"
+            style=" font-family: 'Roboto', sans-serif;
+            font-size: 1.2rem; 
+            font-weight: 700; 
+            color: #333;
+            margin: 10px 0; 
+            text-align: center; 
+            text-transform: capitalize;
+            line-height: 1.4;"
+            
+            >{{course.name}}</h5>
+            <p class="card-text">
+                <span class="discount">Save: {{course.discount}}%</span>
+                <br>
+                <del class="original-price">{{course.price|rupee}}</del>
+                &nbsp;&nbsp;
+                <span class="final-price">{% call_sellprice course.price course.discount as value %}{{value|rupee}}</span>
+            </p>
+        </div>
+    </div>
+</div> -->
+
+<div class="col" style="position: relative; justify-content: center;">
+<div>
+    <p class="display-5" style="font-size:40px ;">{{course.name}}</p>
+    <hr>
+    <p class="display-5" style="font-size:40px ;">Payable Amount : <b>{% call_sellprice course.price course.discount as value %}{{value|rupee}}</b></p>
+    <a class="btn btn-light border" href="?action=create_payment">Continue to payment</a>
+</div>
+</div>
+
+</div>
+</div>
+
+
+{% if order is not None  %}
+    
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+var options = {
+    "key": "rzp_test_FO5cG2h7U4Zob0", 
+    "name": "{{course.name}}",
+    "description": "payment for our site ",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{order.id}}",
+    "callback_url": "http://localhost:8000/verify_payment",
+    "prefill": {
+        "name": "{{user.first_name}}",
+        "email": "{{user.email}}",
+        "contact": "9000090000"
+    },
+  
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+
+rzp1.open();
+</script>
+{%endif%}
+
+{%if error is not None%}
+
+<script>
+    window.onload=()=>{
+        alert('{{error}}')
+    }
+</script>
+
+{%endif%}
+{%endblock%} 
+
+ 

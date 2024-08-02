@@ -1,0 +1,12 @@
+.price{
+    font-size: 17px;
+    font-weight: 600;
+}
+
+#video_list{
+overflow-y:scroll ;
+}
+
+a{
+    text-decoration: none;
+}

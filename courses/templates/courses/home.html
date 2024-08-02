@@ -1,0 +1,187 @@
+{% extends './base.html' %}
+{% block title %}Courses{% endblock %}
+{% load course_custom_tags %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #eaf2fd;
+        margin: 0;
+        padding: 0;
+    }
+
+    .carousel-inner img {
+        height: 400px;
+        object-fit: cover;
+    }
+
+    h1.display-3 {
+        text-align: center;
+        margin: 30px 0;
+        color: #343a40;
+    }
+
+    .container-fluid {
+        padding: 20px;
+    }
+
+    .card {
+        border: none;
+        margin-bottom: 20px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 20px;
+        color: #007bff;
+    }
+
+    .card-text {
+        font-size: 16px;
+        color: #6c757d;
+    }
+
+    .price {
+        font-size: 17px;
+        font-weight: 600;
+        color: #28a745;
+    }
+
+    .card-footer {
+        background-color: #fff;
+        border-top: none;
+        padding: 10px 20px;
+    }
+
+    .card-footer .btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    footer {
+        background-color: #343a40;
+        color: #fff;
+        padding: 20px 0;
+    }
+
+    footer .btn {
+        margin: 0 10px;
+    }
+
+    footer .btn-floating {
+        width: 40px;
+        height: 40px;
+    }
+
+    footer a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        color: #ffc107;
+    }
+
+    footer .text-body {
+        color: #ffc107;
+    }
+</style>
+
+{% block slidebar %}
+<div id="carouselExampleFade" class="carousel slide carousel-fade">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'courses/images/s1.jpg' %}" class="d-block w-100" alt="..." id="img1">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'courses/images/s2.jpg' %}" class="d-block w-100" alt="..." id="img2">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'courses/images/s3.jpg' %}" class="d-block w-100" alt="..." id="img3">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+{% endblock %}
+
+<h1 class="display-3">Courses provide</h1>
+
+<div class="container-fluid">
+    <br>
+    <div class="row">
+        {% for i in courses %}
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card mx-auto">
+                <img src="{{i.thumblain.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.name }}</h5>
+                    <p class="card-text">
+                        Save: {{ i.discount }} %
+                        <br>
+                        <del class="price">{{ i.price|rupee }}</del>
+                        &nbsp;&nbsp;
+                        <span class="price">{% call_sellprice i.price i.discount as value %}{{ value|rupee }}</span>
+                    </p>
+                </div>
+                <div class="card-footer p-0">
+                    {% is_enrolled request i as enrolled %}
+                    <div class="row no-gutters">
+                        {% if enrolled %}
+                        <div class="col"><a href="/course/{{ i.slug }}" class="btn btn-light btn-block">Start Course</a></div>
+                        {% else %}
+                        <div class="col"><a href="/checkout/{{ i.slug }}" class="btn btn-light btn-block">Enroll now</a></div>
+                        <div class="col"><a href="/course/{{ i.slug}}" class="btn btn-light btn-block">Show more</a></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<footer class="text-center">
+    <div class="container p-4 pb-0">
+        <section class="mb-4">
+            <!-- <a class="btn text-white btn-floating m-1" style="background-color: #3b5998;" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+            <a class="btn text-white btn-floating m-1" style="background-color: #55acee;" href="#!" role="button"><i class="fab fa-twitter"></i></a> -->
+            <a class="btn text-white btn-floating m-1" style="background-color: #dd4b39;" href="mailto:mahato.ramanand@gmail.com" role="button"><ion-icon name="mail-open-outline"></ion-icon></a>
+            <!-- <a class="btn text-white btn-floating m-1" style="background-color: #dd4b39;" href="https://mail.google.com/" role="button"><ion-icon name="mail-open-outline"></ion-icon></a> -->
+            <a class="btn text-white btn-floating m-1" style="background-color: #ac2bac;" href="https://www.instagram.com/" role="button"><ion-icon name="logo-instagram"></ion-icon></a>
+            <a class="btn text-white btn-floating m-1" style="background-color: #0082ca;" href="https://www.linkedin.com/in/sheikh-mohammad-wasef-625007238/" role="button"><ion-icon name="logo-linkedin"></ion-icon></a>
+            <a class="btn text-white btn-floating m-1" style="background-color: #333333;" href="https://github.com/Mdwasef" role="button"><ion-icon name="logo-github"></ion-icon></a>
+        </section>
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2020 Copyright:
+        <a class="text-body" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+</footer>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+
+{% extends './base.html' %}
+{%block title%}Courses{%endblock%}
+{%load course_custom_tags %}
+{% load static  %}
+<link rel="stylesheet" type="text/css" href="{% static 'courses/css/form_style.css' %}">
+
+{%block content%}
+
+<link rel="stylesheet" type="text/css" href="{% static 'courses/css/my_course.css' %}">
+
+
+
+<div class="container">
+ 
+<h1 class="display-6">My courses</h1>
+<hr>
+<!-- {{user_courses}} -->
+
+<div class="row">
+    {%for uc in user_courses%}
+    <div class="col mx-auto">
+        <div class="card mx-auto" style="width: 18rem;">
+            <!-- <img src="https://th.bing.com/th/id/OIP.p6dRNuz6Wr5l4ZnKcX2l2QHaFj?rs=1&pid=ImgDetMain" class="card-img-top" alt="..."> -->
+            <img src="{{uc.course.thumblain.url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{uc.course.name}}</h5>
+            </div>
+            
+            <div class="card-footer p-0">
+              <div class="row no-gutters">  
+                  <div class="col"><a href="/course/{{uc.course.slug}}" class="btn btn-light btn-block">Start Course</a></div>
+                </div>
+            </div>
+          </div>
+    </div>
+    {%endfor%}
+   </div>
+
+
+</div>
+
+<!-- </div> -->
+
+{%endblock%}

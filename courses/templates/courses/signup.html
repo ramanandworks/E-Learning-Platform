@@ -1,0 +1,31 @@
+
+{% extends './base.html' %}
+{%block title%}Courses{%endblock%}
+{%load course_custom_tags %}
+{% load static  %}
+<link rel="stylesheet" type="text/css" href="{% static 'courses/css/form_style.css' %}">
+
+{%block content%}
+
+
+
+<div class="container-fluid" style="padding-left:40%;">
+
+<h1 class="display-1">sign up page</h1>
+
+<div>
+   <form action="/signup" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Register" style="background-color: rgb(11, 122, 173);
+    border: none;color: white;
+    border-radius: 10px;
+    width:80px;height: 35px;
+    
+    ">
+   </form>
+</div>
+
+</div>
+
+{%endblock%}

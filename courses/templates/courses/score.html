@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Results</title>
+</head>
+
+
+<style>
+
+/* .board{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    
+} */
+
+body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .board {
+            width: 300px;  /* Adjust width as needed */
+            height: 380px; /* Adjust height as needed */
+            background-color: lightgray; /* For visual reference */
+            text-align: center;
+            border-radius: 10px;
+        }
+
+a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    border: 2px solid gray;
+    padding: 5px;
+    border-radius: 4px;
+}
+</style>
+
+<body>
+
+<div class="board">
+    <h1>Quiz Results</h1>
+    <p>You scored {{ score }} out of {{ total_question}}.</p>
+    <p>percentage : {{percentage}}</p>
+    
+    {% if percentage >= 70.0 %}
+    <h3>You passed!</h3>
+    <h3>Claim your certificate from your registered mail id .</h3>
+    <h3>Thanks to purchase our course.</h3>
+    <h3>For more courses go to home page</h3>
+    <a href="/">Go To Home</a>
+{% else %}
+    <h2>You did not pass.</h2>
+    <h3>Don't be sad . Better luck next time . Attend the quiz again to get the certificate</h3>
+    <a href="/">Go To Home</a>
+{% endif %}
+
+</div>
+</body> 
+</html>

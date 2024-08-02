@@ -1,0 +1,119 @@
+my_course.css
+
+/* form_style.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #343a40;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1.display-6 {
+    font-size: 2rem;
+    color: #495057;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #e9ecef;
+    margin-bottom: 30px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+
+.col {
+    padding: 10px;
+    flex: 1 0 21%; /* Flexbox for responsive columns */
+    max-width: 21%;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+    background-color: #ffffff;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    color: #343a40;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+}
+
+.btn {
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px 20px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 400px;
+    display: inline-block; /* Ensure the button is inline */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-transform: uppercase; /* Uppercase text */
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .col {
+        flex: 1 0 46%;
+        max-width: 46%;
+    }
+}
+
+@media (max-width: 576px) {
+    .col {
+        flex: 1 0 100%;
+        max-width: 100%;
+    }
+}
